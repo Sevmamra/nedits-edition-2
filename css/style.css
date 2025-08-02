@@ -202,7 +202,7 @@ nav a:hover {
 }
 
 /* ======================================
-   New Services Section - Updated
+   New Services Section - Final Update
 ====================================== */
 .services-category {
   margin-bottom: 50px;
@@ -234,26 +234,25 @@ nav a:hover {
 }
 
 .services-container {
-  overflow: hidden;
   position: relative;
-  height: 400px; /* Fixed height for the container */
+  overflow: hidden;
+  height: 400px;
 }
 
 .services-carousel {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  transition: transform 0.6s ease-in-out; /* Main animation transition */
+  transition: transform 0.6s ease-in-out;
   will-change: transform;
 }
 
 .service-card {
-  flex-shrink: 0;
-  width: 320px;
-  height: auto;
-  margin: 0 10px; /* Space between cards */
   background: #fff;
   border-radius: 14px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -261,33 +260,37 @@ nav a:hover {
   text-align: center;
   transition: all 0.6s ease-in-out;
   cursor: pointer;
+  flex-shrink: 0;
+  width: 320px; /* Base width for all cards */
+  height: auto;
 }
 
-/* Transform for left and right cards */
+/* 3D and Size transformations */
 .services-carousel .service-card.left {
-  transform: scale(0.8) rotateY(20deg);
+  transform: scale(0.8) rotateY(-20deg) translateX(-50px);
   opacity: 0.8;
   z-index: 1;
 }
 
 .services-carousel .service-card.right {
-  transform: scale(0.8) rotateY(-20deg);
+  transform: scale(0.8) rotateY(20deg) translateX(50px);
   opacity: 0.8;
   z-index: 1;
 }
 
 .services-carousel .service-card.center {
-  transform: scale(1);
+  transform: scale(1.1); /* Center card ki width aur height badhane ke liye scale use kar rahe hain */
   opacity: 1;
   z-index: 10;
 }
 
 /* On-click glow effect */
 .service-card.active {
-  box-shadow: 0 0 25px 5px #7b0091; /* Glow effect */
-  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 0 25px 5px #7b0091;
+  transform: scale(1.15) translateY(-5px); /* Glow ke saath thoda upar utha hua */
 }
 
+/* Card content fonts as before */
 .card-content h4 {
   font-family: 'Neuton', serif;
   font-size: 24px;
