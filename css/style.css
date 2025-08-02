@@ -250,7 +250,6 @@ nav a:hover {
   position: absolute;
   width: 300px;
   height: auto;
-  min-height: 300px;
   padding: 30px 20px;
   text-align: center;
   transition: all 0.6s ease-in-out;
@@ -260,7 +259,7 @@ nav a:hover {
 
 .service-card.center {
   width: 360px;
-  min-height: 360px;
+  height: auto;
   z-index: 10; /* Center card sabse aage rahega */
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
 }
@@ -309,27 +308,18 @@ nav a:hover {
 
   .service-card {
     width: 280px;
-    min-height: 280px;
+    height: auto;
   }
 
   .service-card.center {
     width: 320px;
-    min-height: 320px;
-  }
-
-  .service-card.left {
-    transform: translateX(-150px) rotateY(20deg);
-  }
-
-  .service-card.right {
-    transform: translateX(150px) rotateY(-20deg);
+    height: auto;
   }
   
   .category-header h3 {
     font-size: 24px;
   }
 }
-
 /* ======================================
    About Us Section
 ====================================== */
