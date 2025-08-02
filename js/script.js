@@ -62,33 +62,30 @@ document.addEventListener('DOMContentLoaded', function () {
         let currentIndex = 0;
         let intervalId;
 
-        function updateCardPositions() {
-            // Remove previous classes
-            cards.forEach(card => card.classList.remove('center', 'left', 'right', 'active'));
+function updateCardPositions() {
+    const totalCards = cards.length;
+    
+    // Calculate indices for center, left, and right cards
+    const centerIndex = currentIndex;
+    const leftIndex = (currentIndex - 1 + totalCards) % totalCards;
+    const rightIndex = (currentIndex + 1) % totalCards;
 
-            // Calculate indices for center, left, and right cards
-            const totalCards = cards.length;
-            const centerIndex = currentIndex;
-            const leftIndex = (currentIndex - 1 + totalCards) % totalCards;
-            const rightIndex = (currentIndex + 1) % totalCards;
+    // First, hide all cards
+    cards.forEach(card => {
+        card.style.display = 'none'; // Hide all cards
+        card.classList.remove('center', 'left', 'right', 'active'); // Remove classes
+    });
 
-            // Apply new classes
-            cards[centerIndex].classList.add('center');
-            cards[leftIndex].classList.add('left');
-            cards[rightIndex].classList.add('right');
+    // Then, show and position the required cards
+    cards[centerIndex].style.display = 'block';
+    cards[leftIndex].style.display = 'block';
+    cards[rightIndex].style.display = 'block';
 
-            // Hide other cards
-            cards.forEach((card, index) => {
-                if (index !== centerIndex && index !== leftIndex && index !== rightIndex) {
-                    card.style.opacity = '0';
-                    card.style.transform = 'scale(0.5)';
-                } else {
-                    card.style.opacity = '1';
-                    card.style.transform = 'none';
-                }
-            });
-        }
-
+    cards[centerIndex].classList.add('center');
+    cards[leftIndex].classList.add('left');
+    cards[rightIndex].classList.add('right');
+}
+        
         // Auto-move carousel
         function startCarousel() {
             intervalId = setInterval(() => {
