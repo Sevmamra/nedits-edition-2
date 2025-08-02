@@ -252,6 +252,7 @@ nav a:hover {
 
 .service-card {
   transition: all 0.6s ease-in-out;
+  position: relative;
   flex-shrink: 0;
   width: 320px;
   margin: 0 10px;
