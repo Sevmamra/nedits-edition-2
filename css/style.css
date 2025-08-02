@@ -237,45 +237,51 @@ nav a:hover {
   position: relative;
   overflow: hidden;
   height: 400px;
-  width: 100%;
 }
 
 .services-carousel {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0px;
+  gap: 20px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   transition: transform 0.6s ease-in-out;
-  position: relative;
-  width: 100%;
+  will-change: transform;
 }
 
 .service-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 30px 20px;
+  text-align: center;
   transition: all 0.6s ease-in-out;
-  position: relative;
+  cursor: pointer;
   flex-shrink: 0;
-  width: 320px;
-  margin: 0 10px;
-  opacity: 0;
-  transform: scale(0.8);
+  width: 320px; /* Base width for all cards */
+  height: auto;
 }
 
-.service-card.left {
-  transform: translateX(-120%) rotateY(-20deg) scale(0.8);
-  opacity: 1;
+/* 3D and Size transformations */
+.services-carousel .service-card.left {
+  transform: scale(0.8) rotateY(-20deg) translateX(-50px);
+  opacity: 0.8;
   z-index: 1;
 }
 
-.service-card.center {
-  transform: translateX(0%) scale(1.1);
+.services-carousel .service-card.right {
+  transform: scale(0.8) rotateY(20deg) translateX(50px);
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.services-carousel .service-card.center {
+  transform: scale(1.1); /* Center card ki width aur height badhane ke liye scale use kar rahe hain */
   opacity: 1;
   z-index: 10;
-}
-
-.service-card.right {
-  transform: translateX(120%) rotateY(20deg) scale(0.8);
-  opacity: 1;
-  z-index: 1;
 }
 
 /* On-click glow effect */
