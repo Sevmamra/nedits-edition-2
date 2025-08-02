@@ -204,16 +204,46 @@ nav a:hover {
 /* ======================================
    New Services Section - Final Update
 ====================================== */
+.services-category {
+  margin-bottom: 50px;
+}
+
+.category-header {
+  background: #222;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.category-header img {
+  width: 30px;
+  height: 30px;
+}
+
+.category-header h3 {
+  font-family: 'Alegreya Sans SC', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
+  margin: 0;
+}
+
 .services-container {
   position: relative;
   overflow: hidden;
   height: 400px;
-  /* Updated to better hide overflowing cards */
-  padding: 0 50px; 
 }
 
 .services-carousel {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -231,26 +261,25 @@ nav a:hover {
   transition: all 0.6s ease-in-out;
   cursor: pointer;
   flex-shrink: 0;
-  width: 300px; /* Base width */
+  width: 320px; /* Base width for all cards */
   height: auto;
-  margin: 0 10px;
 }
 
 /* 3D and Size transformations */
 .services-carousel .service-card.left {
-  transform: scale(0.9) rotateY(-20deg);
+  transform: scale(0.8) rotateY(-20deg) translateX(-50px);
   opacity: 0.8;
   z-index: 1;
 }
 
 .services-carousel .service-card.right {
-  transform: scale(0.9) rotateY(20deg);
+  transform: scale(0.8) rotateY(20deg) translateX(50px);
   opacity: 0.8;
   z-index: 1;
 }
 
 .services-carousel .service-card.center {
-  transform: scale(1.1);
+  transform: scale(1.1); /* Center card ki width aur height badhane ke liye scale use kar rahe hain */
   opacity: 1;
   z-index: 10;
 }
@@ -258,9 +287,10 @@ nav a:hover {
 /* On-click glow effect */
 .service-card.active {
   box-shadow: 0 0 25px 5px #7b0091;
-  transform: scale(1.15) translateY(-5px);
+  transform: scale(1.15) translateY(-5px); /* Glow ke saath thoda upar utha hua */
 }
 
+/* Card content fonts as before */
 .card-content h4 {
   font-family: 'Neuton', serif;
   font-size: 24px;
