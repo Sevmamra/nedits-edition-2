@@ -255,7 +255,13 @@ nav a:hover {
   transition: all 0.6s ease-in-out;
   cursor: pointer;
   z-index: 1; /* Default z-index */
+  opacity: 0;
+  display: none;
 }
+
+.service-card.center, .service-card.left, .service-card.right {
+  opacity: 1;
+  display: block;
 
 .service-card.center {
   width: 360px;
