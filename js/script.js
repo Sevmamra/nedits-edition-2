@@ -58,83 +58,82 @@ document.addEventListener('DOMContentLoaded', function () {
   const intervalTime = 3000; // 3 seconds
 
   containers.forEach(container => {
-    const carouselContainer = container.querySelector('.services-container');
     const carousel = container.querySelector('.services-carousel');
     const cards = Array.from(carousel.querySelectorAll('.service-card'));
     let currentIndex = 0;
     let intervalId;
     let isPaused = false;
 
-    // Set initial card positions
     function updateCardPositions() {
-      // Remove all position and active classes first
-      cards.forEach(card => card.classList.remove('center', 'left', 'right', 'active'));
-
       const totalCards = cards.length;
-      
+
+      cards.forEach((card, index) => {
+        card.classList.remove('left', 'center', 'right', 'active');
+        card.style.opacity = '0';
+        card.style.display = 'none';
+      });
+
       const leftIndex = (currentIndex - 1 + totalCards) % totalCards;
+      const centerIndex = currentIndex;
       const rightIndex = (currentIndex + 1) % totalCards;
 
-      // Apply classes to the visible cards
       cards[leftIndex].classList.add('left');
-      cards[currentIndex].classList.add('center');
-      cards[rightIndex].classList.add('right');
+      cards[leftIndex].style.display = 'block';
 
-      // Hide non-visible cards completely
-      cards.forEach((card, index) => {
-          if (index !== leftIndex && index !== currentIndex && index !== rightIndex) {
-              card.style.opacity = '0';
-              card.style.display = 'none'; // Hide non-visible cards
-          } else {
-              card.style.opacity = '1';
-              card.style.display = 'block'; // Show visible cards
-          }
-      });
+      cards[centerIndex].classList.add('center');
+      cards[centerIndex].style.display = 'block';
+
+      cards[rightIndex].classList.add('right');
+      cards[rightIndex].style.display = 'block';
+
+      // Trigger reflow for smooth animation
+      void cards[leftIndex].offsetWidth;
+      void cards[centerIndex].offsetWidth;
+      void cards[rightIndex].offsetWidth;
+
+      cards[leftIndex].style.opacity = '1';
+      cards[centerIndex].style.opacity = '1';
+      cards[rightIndex].style.opacity = '1';
     }
 
-    // Auto-move carousel
     function startCarousel() {
       if (isPaused) return;
+
       intervalId = setInterval(() => {
-        currentIndex = (currentIndex + 1) % cards.length;
+        const totalCards = cards.length;
+        currentIndex = (currentIndex + 1) % totalCards;
         updateCardPositions();
       }, intervalTime);
     }
 
-    // Click event on cards (for glow)
     carousel.addEventListener('click', (event) => {
-        const clickedCard = event.target.closest('.service-card');
-        if (!clickedCard) return;
+      const clickedCard = event.target.closest('.service-card');
+      if (!clickedCard) return;
 
-        // Only handle clicks on the center card
-        if (clickedCard.classList.contains('center')) {
-            const isActive = clickedCard.classList.contains('active');
-
-            if (!isActive) {
-                // Pause animation and add glow
-                clearInterval(intervalId);
-                isPaused = true;
-                clickedCard.classList.add('active');
-            } else {
-                // Remove glow and restart animation
-                clickedCard.classList.remove('active');
-                isPaused = false;
-                startCarousel();
-            }
+      if (clickedCard.classList.contains('center')) {
+        const isActive = clickedCard.classList.contains('active');
+        if (!isActive) {
+          clearInterval(intervalId);
+          isPaused = true;
+          clickedCard.classList.add('active');
+        } else {
+          clickedCard.classList.remove('active');
+          isPaused = false;
+          startCarousel();
         }
+      }
     });
 
-    // Deselect and restart animation on any click outside the cards
     document.addEventListener('click', (event) => {
-        const isClickedOnCard = event.target.closest('.service-card');
-        if (!isClickedOnCard && isPaused) {
-            const activeCard = carousel.querySelector('.service-card.active');
-            if (activeCard) {
-                activeCard.classList.remove('active');
-            }
-            isPaused = false;
-            startCarousel();
+      const isClickedOnCard = event.target.closest('.service-card');
+      if (!isClickedOnCard && isPaused) {
+        const activeCard = carousel.querySelector('.service-card.active');
+        if (activeCard) {
+          activeCard.classList.remove('active');
         }
+        isPaused = false;
+        startCarousel();
+      }
     });
 
     // Initial setup
