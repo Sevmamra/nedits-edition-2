@@ -202,7 +202,7 @@ nav a:hover {
 }
 
 /* ======================================
-   Services Section
+   New Services Section - Updated
 ====================================== */
 .services-category {
   margin-bottom: 50px;
@@ -220,7 +220,7 @@ nav a:hover {
 }
 
 .category-header img {
-  width: 30px; /* Ya jo bhi size aapko pasand ho */
+  width: 30px;
   height: 30px;
 }
 
@@ -233,53 +233,53 @@ nav a:hover {
   margin: 0;
 }
 
+.services-container {
+  overflow: hidden;
+  position: relative;
+  height: 400px; /* Fixed height for the container */
+}
+
 .services-carousel {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  position: relative;
-  overflow: hidden;
-  height: 400px; /* Carousel ki height fix kar di hai */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.6s ease-in-out; /* Main animation transition */
+  will-change: transform;
 }
 
 .service-card {
+  flex-shrink: 0;
+  width: 320px;
+  height: auto;
+  margin: 0 10px; /* Space between cards */
   background: #fff;
   border-radius: 14px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  width: 300px;
-  height: auto;
   padding: 30px 20px;
   text-align: center;
   transition: all 0.6s ease-in-out;
   cursor: pointer;
-  z-index: 1; /* Default z-index */
-  opacity: 0;
-  display: none;
 }
 
-.service-card.center, .service-card.left, .service-card.right {
+/* Transform for left and right cards */
+.services-carousel .service-card.left {
+  transform: scale(0.8) rotateY(20deg);
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.services-carousel .service-card.right {
+  transform: scale(0.8) rotateY(-20deg);
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.services-carousel .service-card.center {
+  transform: scale(1);
   opacity: 1;
-  display: block;
-
-.service-card.center {
-  width: 360px;
-  height: auto;
-  z-index: 10; /* Center card sabse aage rahega */
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
-}
-
-.service-card.left {
-  transform: translateX(-180px) rotateY(20deg);
-  opacity: 0.8;
-  z-index: 5;
-}
-
-.service-card.right {
-  transform: translateX(180px) rotateY(-20deg);
-  opacity: 0.8;
-  z-index: 5;
+  z-index: 10;
 }
 
 /* On-click glow effect */
@@ -304,28 +304,19 @@ nav a:hover {
   line-height: 1.6;
 }
 
-/* ======================================
-   Responsive Adjustments for Services
-====================================== */
 @media (max-width: 767px) {
-  .services-carousel {
-    height: 350px;
+  .services-container {
+    height: 380px;
   }
-
   .service-card {
     width: 280px;
-    height: auto;
+    margin: 0 5px;
   }
-
-  .service-card.center {
-    width: 320px;
-    height: auto;
-  }
-  
   .category-header h3 {
     font-size: 24px;
   }
 }
+
 /* ======================================
    About Us Section
 ====================================== */
