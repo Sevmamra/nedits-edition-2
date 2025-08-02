@@ -52,84 +52,88 @@ document.addEventListener('DOMContentLoaded', function () {
 })();
 
 
-// Services Carousel Logic
+// Services Carousel Logic - Corrected
 (function () {
-    const carousels = document.querySelectorAll('.services-carousel');
-    const intervalTime = 3000; // 3 seconds
+  const containers = document.querySelectorAll('.services-container');
+  const intervalTime = 3000; // 3 seconds
 
-    carousels.forEach(carousel => {
-        let cards = Array.from(carousel.querySelectorAll('.service-card'));
-        let currentIndex = 0;
-        let intervalId;
+  containers.forEach(container => {
+    const carousel = container.querySelector('.services-carousel');
+    const cards = Array.from(carousel.querySelectorAll('.service-card'));
+    let currentIndex = 0;
+    let intervalId;
+    let isPaused = false;
 
-function updateCardPositions() {
-    const totalCards = cards.length;
-    
-    // Calculate indices for center, left, and right cards
-    const centerIndex = currentIndex;
-    const leftIndex = (currentIndex - 1 + totalCards) % totalCards;
-    const rightIndex = (currentIndex + 1) % totalCards;
+    // Set initial card positions
+    function updateCardPositions() {
+      const cardWidth = cards[0].offsetWidth + 20; // Card width + margin
+      const totalCards = cards.length;
+      
+      const leftIndex = (currentIndex - 1 + totalCards) % totalCards;
+      const rightIndex = (currentIndex + 1) % totalCards;
+      
+      // Reset classes
+      cards.forEach(card => card.classList.remove('center', 'left', 'right'));
 
-    // First, hide all cards
-    cards.forEach(card => {
-        card.style.display = 'none'; // Hide all cards
-        card.classList.remove('center', 'left', 'right', 'active'); // Remove classes
-    });
+      // Apply classes
+      cards[currentIndex].classList.add('center');
+      cards[leftIndex].classList.add('left');
+      cards[rightIndex].classList.add('right');
 
-    // Then, show and position the required cards
-    cards[centerIndex].style.display = 'block';
-    cards[leftIndex].style.display = 'block';
-    cards[rightIndex].style.display = 'block';
+      // Calculate new transform value
+      const offset = (currentIndex) * cardWidth;
+      carousel.style.transform = `translate(-${offset}px, -50%)`;
+    }
 
-    cards[centerIndex].classList.add('center');
-    cards[leftIndex].classList.add('left');
-    cards[rightIndex].classList.add('right');
-}
-        
-        // Auto-move carousel
-        function startCarousel() {
-            intervalId = setInterval(() => {
-                currentIndex = (currentIndex + 1) % cards.length;
-                updateCardPositions();
-            }, intervalTime);
+    // Auto-move carousel
+    function startCarousel() {
+      if (isPaused) return;
+      intervalId = setInterval(() => {
+        currentIndex = (currentIndex + 1) % cards.length;
+        updateCardPositions();
+      }, intervalTime);
+    }
+
+    // Pause/Play functionality
+    function togglePause() {
+        isPaused = !isPaused;
+        if (isPaused) {
+            clearInterval(intervalId);
+        } else {
+            startCarousel();
+        }
+    }
+
+    // Click event on cards
+    cards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+        // Clear previous active card and remove glow
+        const previousActive = carousel.querySelector('.service-card.active');
+        if (previousActive) {
+          previousActive.classList.remove('active');
         }
 
-        // Pause carousel on hover
-        carousel.addEventListener('mouseenter', () => clearInterval(intervalId));
-        carousel.addEventListener('mouseleave', () => {
-            // Restart carousel if not paused by a click
-            const isPausedByClick = cards.some(card => card.classList.contains('paused-by-click'));
-            if (!isPausedByClick) {
-                startCarousel();
-            }
-        });
+        // Add active class and glow to the clicked card
+        card.classList.add('active');
 
-        // Click event on cards
-        cards.forEach((card, index) => {
-            card.addEventListener('click', () => {
-                // Clear any running interval
-                clearInterval(intervalId);
-
-                // Check if this card is already active
-                const wasActive = card.classList.contains('active');
-
-                // Remove active/paused classes from all cards in this carousel
-                cards.forEach(c => c.classList.remove('active', 'paused-by-click'));
-
-                // If not already active, make it active
-                if (!wasActive) {
-                    card.classList.add('active', 'paused-by-click');
-                } else {
-                    // If it was active, restart the carousel
-                    startCarousel();
-                }
-            });
-        });
-
-        // Initial setup
-        updateCardPositions();
-        startCarousel();
+        // Pause the carousel
+        clearInterval(intervalId);
+        isPaused = true;
+      });
     });
+
+    // Reset carousel on mouseleave from container
+    container.addEventListener('mouseleave', () => {
+      // Only restart if not paused by a click
+      if (!isPaused) {
+        startCarousel();
+      }
+    });
+
+    // Initial setup
+    updateCardPositions();
+    startCarousel();
+  });
 })();
 
 // Testimonials slide animation
