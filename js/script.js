@@ -145,38 +145,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Testimonials slide animation
 (function () {
-    const testimonials = document.querySelectorAll('.testimonial');
+  const tests = document.querySelectorAll('.testimonial');
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const testimonial = entry.target;
-                const index = Array.from(testimonials).indexOf(testimonial);
-                
-                // Add the animation class which triggers the CSS animation
-                testimonial.classList.add('aos-animate');
-                
-                // Apply custom transforms based on index for the slide effect
-                if (index % 2 === 0) {
-                    testimonial.style.transform = 'translateX(-100px)';
-                } else {
-                    testimonial.style.transform = 'translateX(100px)';
-                }
-                
-                setTimeout(() => {
-                    testimonial.style.transition = 'transform 0.6s ease-out';
-                    testimonial.style.transform = 'translateX(0)';
-                }, 50);
-
-                observer.unobserve(testimonial); // Stop observing after animation
-            }
-        });
-    }, { threshold: 0.1 });
-
-    testimonials.forEach(testimonial => {
-        testimonial.style.opacity = '0';
-        observer.observe(testimonial);
+  window.addEventListener('scroll', () => {
+    tests.forEach((t, i) => {
+      if (t.getBoundingClientRect().top < window.innerHeight - 50 && !t.classList.contains('shown')) {
+        t.classList.add('shown');
+        t.style.transform = (i % 2 === 0) ? 'translateX(-100px)' : 'translateX(100px)';
+        setTimeout(() => {
+          t.style.transition = 'all 0.6s';
+          t.style.transform = 'translateX(0)';
+          t.style.opacity = '1';
+        }, 50);
+      }
     });
+  });
 })();
 
 // Header Title Animation on Scroll (New!)
