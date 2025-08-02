@@ -52,27 +52,21 @@ document.addEventListener('DOMContentLoaded', function () {
 })();
 
 
-// Services Carousel Logic - Corrected & Final
+// Services Carousel Logic - Corrected
 (function () {
   const containers = document.querySelectorAll('.services-category');
   const intervalTime = 3000; // 3 seconds
 
   containers.forEach(container => {
+    const carouselContainer = container.querySelector('.services-container');
     const carousel = container.querySelector('.services-carousel');
     const cards = Array.from(carousel.querySelectorAll('.service-card'));
     let currentIndex = 0;
     let intervalId;
     let isPaused = false;
 
-    // Center the carousel initially
-    function centerCarousel() {
-      const cardWidth = cards[0].offsetWidth + 20; // card width + margin
-      const totalWidth = cards.length * cardWidth;
-      const visibleWidth = carousel.offsetWidth;
-      carousel.style.left = `calc(50% - ${cardWidth / 2}px)`;
-    }
-
-    function updateCarousel() {
+    // Set initial card positions
+    function updateCardPositions() {
       // Remove all position and active classes first
       cards.forEach(card => card.classList.remove('center', 'left', 'right', 'active'));
 
@@ -90,16 +84,12 @@ document.addEventListener('DOMContentLoaded', function () {
       cards.forEach((card, index) => {
           if (index !== leftIndex && index !== currentIndex && index !== rightIndex) {
               card.style.opacity = '0';
-              card.style.display = 'none';
+              card.style.display = 'none'; // Hide non-visible cards
           } else {
               card.style.opacity = '1';
-              card.style.display = 'block';
+              card.style.display = 'block'; // Show visible cards
           }
       });
-      
-      const cardWidth = cards[0].offsetWidth + 20; // card width + margin
-      const offset = currentIndex * cardWidth;
-      carousel.style.transform = `translate3d(calc(-50% - ${offset}px), -50%, 0)`;
     }
 
     // Auto-move carousel
@@ -107,32 +97,37 @@ document.addEventListener('DOMContentLoaded', function () {
       if (isPaused) return;
       intervalId = setInterval(() => {
         currentIndex = (currentIndex + 1) % cards.length;
-        updateCarousel();
+        updateCardPositions();
       }, intervalTime);
     }
-    
-    // Stop carousel and add active class on center card click
+
+    // Click event on cards (for glow)
     carousel.addEventListener('click', (event) => {
         const clickedCard = event.target.closest('.service-card');
-        if (!clickedCard || !clickedCard.classList.contains('center')) return;
-        
-        const isActive = clickedCard.classList.contains('active');
+        if (!clickedCard) return;
 
-        if (!isActive) {
-            clearInterval(intervalId);
-            isPaused = true;
-            clickedCard.classList.add('active');
-        } else {
-            // Already active, so remove and restart
-            clickedCard.classList.remove('active');
-            isPaused = false;
-            startCarousel();
+        // Only handle clicks on the center card
+        if (clickedCard.classList.contains('center')) {
+            const isActive = clickedCard.classList.contains('active');
+
+            if (!isActive) {
+                // Pause animation and add glow
+                clearInterval(intervalId);
+                isPaused = true;
+                clickedCard.classList.add('active');
+            } else {
+                // Remove glow and restart animation
+                clickedCard.classList.remove('active');
+                isPaused = false;
+                startCarousel();
+            }
         }
     });
 
     // Deselect and restart animation on any click outside the cards
     document.addEventListener('click', (event) => {
-        if (!event.target.closest('.services-carousel') && isPaused) {
+        const isClickedOnCard = event.target.closest('.service-card');
+        if (!isClickedOnCard && isPaused) {
             const activeCard = carousel.querySelector('.service-card.active');
             if (activeCard) {
                 activeCard.classList.remove('active');
@@ -143,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Initial setup
-    updateCarousel();
+    updateCardPositions();
     startCarousel();
   });
 })();
