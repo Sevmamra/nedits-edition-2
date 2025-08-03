@@ -252,23 +252,35 @@ nav a:hover {
 }
 
 .service-card {
-    background: #fff;
-    border-radius: 20px; /* Thoda zyada rounded */
-    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
-    padding: 25px 25px;
-    text-align: left; /* Updated for better paragraph readability */
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-    flex-shrink: 0;
-    width: 320px;
-    min-height: 280px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform-origin: center;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  position: relative;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  padding: 50px 25px 25px;
+  width: 320px;
+  min-height: 280px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* NEW HEADING BLOCK */
+.card-heading {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000;
+  color: #fff;
+  font-family: 'Neuton', serif;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 0;
+  white-space: nowrap;
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* New CSS classes for positions */
@@ -320,12 +332,11 @@ nav a:hover {
 }
 
 .card-content p {
-    font-family: 'ABeeZee', sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: #333;
-    margin: 0;
-    padding: 0 5px;
+  font-family: 'ABeeZee', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #333;
+  margin: 0;
 }
 
 @media (max-width: 767px) {
