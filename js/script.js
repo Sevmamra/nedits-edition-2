@@ -74,25 +74,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const leftIndex = (currentIndex - 1 + totalCards) % totalCards;
             const rightIndex = (currentIndex + 1) % totalCards;
+            const nextRightIndex = (currentIndex + 2) % totalCards;
+            const prevLeftIndex = (currentIndex - 2 + totalCards) % totalCards;
 
-            // Update classes for all cards
-            cards.forEach((card, index) => {
-                card.classList.remove('center', 'left', 'right', 'active', 'leaving-left', 'entering-right');
-                
-                if (index === leftIndex) {
-                    card.classList.add('left');
-                } else if (index === currentIndex) {
-                    card.classList.add('center');
-                } else if (index === rightIndex) {
-                    card.classList.add('right');
-                } else {
-                    // Hide other cards immediately without animation
-                    card.style.transition = 'none';
-                    card.style.transform = 'translate(-50%, -50%) scale(0.6)';
-                    card.style.opacity = '0';
-                }
+            // Remove all position and active classes from all cards
+            cards.forEach(card => {
+                card.classList.remove('center', 'left', 'right', 'active');
+                card.style.opacity = '0';
+                card.style.transform = 'translate(-50%, -50%) scale(0.6)';
             });
 
+            // Set new positions for the visible cards
+            cards[leftIndex].classList.add('left');
+            cards[currentIndex].classList.add('center');
+            cards[rightIndex].classList.add('right');
+
+            // Show the visible cards
+            cards[leftIndex].style.opacity = '0.5';
+            cards[leftIndex].style.transform = 'translate(-150%, -50%) scale(0.7) rotateY(30deg)';
+
+            cards[currentIndex].style.opacity = '1';
+            cards[currentIndex].style.transform = 'translate(-50%, -50%) scale(1.1)';
+
+            cards[rightIndex].style.opacity = '0.5';
+            cards[rightIndex].style.transform = 'translate(50%, -50%) scale(0.7) rotateY(-30deg)';
+
+            // Animate cards that are coming into view
             setTimeout(() => {
                 isAnimating = false;
             }, 800); // Match this with your CSS transition duration
