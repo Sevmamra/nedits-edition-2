@@ -252,35 +252,21 @@ nav a:hover {
 }
 
 .service-card {
-  position: relative;
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  padding: 50px 25px 25px;
-  width: 320px;
-  min-height: 280px;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-/* NEW HEADING BLOCK */
-.card-heading {
-  position: absolute;
-  top: -22px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #000;
-  color: #fff;
-  font-family: 'Neuton', serif;
-  font-size: 20px;
-  font-weight: 600;
-  padding: 8px 20px;
-  border-radius: 0;
-  white-space: nowrap;
-  z-index: 2;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 30px 20px;
+    text-align: center;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* All properties par transition */
+    cursor: pointer;
+    flex-shrink: 0;
+    width: 320px; /* Base width for all cards */
+    height: auto;
+    min-height: 280px; /* Cards ki length badhane ke liye min-height use kiya, aur thoda aur badhaya */
+    position: absolute; /* Positioning ke liye absolute */
+    left: 50%; /* Center se position */
+    top: 50%;
+    transform-origin: center;
 }
 
 /* New CSS classes for positions */
@@ -322,21 +308,17 @@ nav a:hover {
 .card-content h4 {
     font-family: 'Neuton', serif;
     font-size: 24px;
-    font-weight: 500;
-    background: #000;
+    font-weight: 400;
+    margin-bottom: 15px;
+    background: #333;
     color: #fff;
-    padding: 10px 15px;
-    border-radius: 6px;
-    text-align: center;
-    margin: 0;
+    padding: 5px 10px;
 }
 
 .card-content p {
-  font-family: 'ABeeZee', sans-serif;
-  font-size: 16px;
-  line-height: 1.7;
-  color: #333;
-  margin: 0;
+    font-family: 'ABeeZee', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
 }
 
 @media (max-width: 767px) {
