@@ -166,184 +166,195 @@ nav a:hover {
 }
 
 /* ======================================
-   Section Headings
+   Section Headings
 ====================================== */
 .section {
-  margin: auto;
-  max-width: 1100px;
-  padding: 70px 20px;
+  margin: auto;
+  max-width: 1100px;
+  padding: 70px 20px;
 }
 
 /* ======================================
-   Section Headings
+   Section Headings
 ====================================== */
 .section h2 {
-  color: #333;
-  font-family: 'Days One', sans-serif;
-  font-size: 32px;
-  margin-bottom: 30px;
-  display: flex;
-  align-items: center;
+  color: #333;
+  font-family: 'Days One', sans-serif;
+  font-size: 32px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
 }
 
 .section h2::before {
-  content: '';
-  width: 6px;
-  height: 40px;
-  background: #7b0091;
-  margin-right: 15px;
-  transform: scaleX(0); /* Animation ke liye */
-  transform-origin: left;
-  transition: transform 0.8s ease-out;
+  content: '';
+  width: 6px;
+  height: 40px;
+  background: #7b0091;
+  margin-right: 15px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s ease-out;
 }
 
 .section h2.aos-animate::before {
-  transform: scaleX(1);
+  transform: scaleX(1);
 }
 
 /* ======================================
-  New Services Section - Final Update (Updated CSS)
+  New Services Section - Final Update (Updated CSS)
 ====================================== */
 .services-category {
-    margin-bottom: 50px;
+    margin-bottom: 50px;
 }
 
+/* Tumhari design ke hisaab se category header ka background color aur text color badla */
 .category-header {
-    background: #222;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 25px;
+    background: #7b0091; /* Dark purple color */
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Icon aur text ke beech ka gap badhaya */
+    margin-bottom: 25px;
 }
 
 .category-header img {
-    width: 30px;
-    height: 30px;
+    width: 30px;
+    height: 30px;
 }
 
 .category-header h3 {
-    font-family: 'Alegreya Sans SC', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    color: #fff;
-    margin: 0;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #fff;
+    margin: 0;
 }
 
 .services-container {
-    position: relative;
-    overflow: hidden; /* Yeh important hai, taki half cards hide ho jaayein */
-    height: 400px; /* Card ki length badhane ke liye height badhai */
+    position: relative;
+    overflow: hidden;
+    height: 400px;
 }
 
 .services-carousel {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    /* Transition yahan se hata di hai, ab cards par individually apply hogi */
-    will-change: transform;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    will-change: transform;
 }
 
 .service-card {
-    background: #fff;
-    border-radius: 14px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    padding: 30px 20px;
-    text-align: center;
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* All properties par transition */
-    cursor: pointer;
-    flex-shrink: 0;
-    width: 320px; /* Base width for all cards */
-    height: auto;
-    min-height: 280px; /* Cards ki length badhane ke liye min-height use kiya, aur thoda aur badhaya */
-    position: absolute; /* Positioning ke liye absolute */
-    left: 50%; /* Center se position */
-    top: 50%;
-    transform-origin: center;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 30px 20px;
+    text-align: center;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+    flex-shrink: 0;
+    width: 320px;
+    height: auto;
+    min-height: 280px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform-origin: center;
+
+    /* Default state for cards jo center mein nahi hain */
+    background: #f0f0f0; /* Greyish background */
+    color: #666; /* Greyish text */
+    opacity: 0.7; /* Thoda transparent */
 }
 
 /* New CSS classes for positions */
 .service-card.left {
-    transform: translate(-150%, -50%) scale(0.7) rotateY(30deg); /* Left card ko aur bahar dhakela, scale kiya aur rotate kiya */
-    opacity: 0.5; /* Opacity 50% rakhi */
-    z-index: 1;
+    transform: translate(-150%, -50%) scale(0.7) rotateY(30deg);
+    z-index: 1;
 }
 
 .service-card.center {
-    transform: translate(-50%, -50%) scale(1.1); /* Center card ko bada kiya */
-    opacity: 1; /* Opacity 100% rakhi */
-    z-index: 10;
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 1;
+    z-index: 10;
+    /* Center card ko white background aur black text diya */
+    background: #fff;
+    color: #333;
 }
 
 .service-card.right {
-    transform: translate(50%, -50%) scale(0.7) rotateY(-30deg); /* Right card ko aur bahar dhakela, scale kiya aur rotate kiya */
-    opacity: 0.5; /* Opacity 0.5 rakhi */
-    z-index: 1;
+    transform: translate(50%, -50%) scale(0.7) rotateY(-30deg);
+    z-index: 1;
 }
 
 /* On-click glow effect */
 .service-card.active {
-    box-shadow: 0 0 25px 5px #7b0091;
-    transform: translate(-50%, -50%) scale(1.15) translateY(-5px); /* Glow ke saath thoda upar utha hua */
+    box-shadow: 0 0 25px 5px #7b0091;
+    transform: translate(-50%, -50%) scale(1.15) translateY(-5px);
 }
 
 /* New classes for animation */
 .service-card.leaving-left {
-    transform: translate(-200%, -50%) scale(0.6) rotateY(45deg); /* Left card ko fade out karne ke liye */
-    opacity: 0;
+    transform: translate(-200%, -50%) scale(0.6) rotateY(45deg);
+    opacity: 0;
 }
 .service-card.entering-right {
-    transform: translate(150%, -50%) scale(0.6) rotateY(-45deg); /* Right se naya card aayega */
-    opacity: 0;
+    transform: translate(150%, -50%) scale(0.6) rotateY(-45deg);
+    opacity: 0;
 }
 
-/* Card content fonts as before */
+/* Card content fonts */
 .card-content h4 {
-    font-family: 'Neuton', serif;
-    font-size: 24px;
-    font-weight: 400;
-    margin-bottom: 15px;
-    background: #333;
-    color: #fff;
-    padding: 5px 10px;
+    font-family: 'Neuton', serif;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    /* Text color center card ke liye automatic black ho jayega */
+    background: transparent; /* Remove background from h4 */
 }
 
 .card-content p {
-    font-family: 'ABeeZee', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
+    font-family: 'ABeeZee', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Center card ke h4 ke liye specific style */
+.service-card.center .card-content h4 {
+    background: #333;
+    color: #fff;
+    padding: 5px 10px;
 }
 
 @media (max-width: 767px) {
-    .services-container {
-        height: 380px;
-    }
-    .service-card {
-        width: 280px;
-        min-height: 250px;
-    }
-    /* Mobile par 3D effect adjust kiya */
-    .service-card.left {
-        transform: translate(-130%, -50%) scale(0.7);
-        z-index: 1;
-    }
-    .service-card.right {
-        transform: translate(30%, -50%) scale(0.7);
-        z-index: 1;
-    }
-    .service-card.center {
-        transform: translate(-50%, -50%) scale(1.1);
-    }
-    .category-header h3 {
-        font-size: 24px;
-    }
+    .services-container {
+        height: 380px;
+    }
+    .service-card {
+        width: 280px;
+        min-height: 250px;
+    }
+    .service-card.left {
+        transform: translate(-130%, -50%) scale(0.7);
+        z-index: 1;
+    }
+    .service-card.right {
+        transform: translate(30%, -50%) scale(0.7);
+        z-index: 1;
+    }
+    .service-card.center {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    .category-header h3 {
+        font-size: 24px;
+    }
 }
 
 /* ======================================
