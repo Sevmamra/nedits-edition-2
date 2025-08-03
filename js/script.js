@@ -66,32 +66,30 @@ document.addEventListener('DOMContentLoaded', function () {
         let isPaused = false;
         let isAnimating = false;
 
-        // Set initial card positions
         function updateCardPositions() {
             if (isAnimating) return;
             isAnimating = true;
 
-            // Remove all position and active classes from all cards
-            cards.forEach(card => {
-                card.classList.remove('center', 'left', 'right', 'active', 'previous-left', 'previous-right');
-                card.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            });
+            cards.forEach(card => card.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)');
 
-            // Calculate the indices of the visible cards
             const leftIndex = (currentIndex - 1 + totalCards) % totalCards;
             const rightIndex = (currentIndex + 1) % totalCards;
 
-            // Apply classes to the visible cards
-            cards[leftIndex].classList.add('left');
-            cards[currentIndex].classList.add('center');
-            cards[rightIndex].classList.add('right');
-
-            // Hide cards that are not in visible positions
+            // Update classes for all cards
             cards.forEach((card, index) => {
-                if (index !== leftIndex && index !== currentIndex && index !== rightIndex) {
-                    card.style.visibility = 'hidden';
+                card.classList.remove('center', 'left', 'right', 'active', 'leaving-left', 'entering-right');
+                
+                if (index === leftIndex) {
+                    card.classList.add('left');
+                } else if (index === currentIndex) {
+                    card.classList.add('center');
+                } else if (index === rightIndex) {
+                    card.classList.add('right');
                 } else {
-                    card.style.visibility = 'visible';
+                    // Hide other cards immediately without animation
+                    card.style.transition = 'none';
+                    card.style.transform = 'translate(-50%, -50%) scale(0.6)';
+                    card.style.opacity = '0';
                 }
             });
 
@@ -99,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 isAnimating = false;
             }, 800); // Match this with your CSS transition duration
         }
-
+        
         // Auto-move carousel
         function startCarousel() {
             if (isPaused) return;
