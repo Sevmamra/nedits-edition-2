@@ -236,7 +236,7 @@ nav a:hover {
 .services-container {
     position: relative;
     overflow: hidden; /* Yeh important hai, taki half cards hide ho jaayein */
-    height: 400px;
+    height: 500px; /* Card ki length badhane ke liye height badhai */
 }
 
 .services-carousel {
@@ -248,7 +248,7 @@ nav a:hover {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth animation ke liye transition */
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth animation ke liye transition time badhaya */
     will-change: transform;
 }
 
@@ -258,38 +258,34 @@ nav a:hover {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     padding: 30px 20px;
     text-align: center;
-    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* All properties par transition */
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* All properties par transition time badhaya */
     cursor: pointer;
     flex-shrink: 0;
     width: 320px; /* Base width for all cards */
     height: auto;
+    min-height: 380px; /* Cards ki length badhane ke liye min-height use kiya */
     position: absolute; /* Positioning ke liye absolute */
     left: 50%; /* Center se position */
     top: 50%;
     transform-origin: center;
-    visibility: hidden; /* Hidden cards ko hide rakhenge */
-    opacity: 0; /* Opacity se fade in/out effect */
 }
 
 /* New CSS classes for positions */
 .service-card.left {
-    visibility: visible;
-    opacity: 1;
-    transform: translate(-100%, -50%) scale(0.8) rotateY(20deg); /* Left card ko bahar dhakela, thoda scale kiya aur rotate kiya */
+    transform: translate(-150%, -50%) scale(0.7) rotateY(30deg); /* Left card ko aur bahar dhakela, scale kiya aur rotate kiya */
+    opacity: 0.5; /* Opacity 50% rakhi */
     z-index: 1;
 }
 
 .service-card.center {
-    visibility: visible;
-    opacity: 1;
     transform: translate(-50%, -50%) scale(1.1); /* Center card ko bada kiya */
+    opacity: 1; /* Opacity 100% rakhi */
     z-index: 10;
 }
 
 .service-card.right {
-    visibility: visible;
-    opacity: 1;
-    transform: translate(0, -50%) scale(0.8) rotateY(-20deg); /* Right card ko bahar dhakela, thoda scale kiya aur rotate kiya */
+    transform: translate(50%, -50%) scale(0.7) rotateY(-30deg); /* Right card ko aur bahar dhakela, scale kiya aur rotate kiya */
+    opacity: 0.5; /* Opacity 50% rakhi */
     z-index: 1;
 }
 
@@ -318,18 +314,18 @@ nav a:hover {
 
 @media (max-width: 767px) {
     .services-container {
-        height: 380px;
+        height: 450px;
     }
     .service-card {
         width: 280px;
     }
-    /* Mobile par 3D effect thoda kam kar sakte hain ya hata sakte hain */
+    /* Mobile par 3D effect adjust kiya */
     .service-card.left {
-        transform: translate(-120%, -50%) scale(0.8);
+        transform: translate(-130%, -50%) scale(0.7);
         z-index: 1;
     }
     .service-card.right {
-        transform: translate(20%, -50%) scale(0.8);
+        transform: translate(30%, -50%) scale(0.7);
         z-index: 1;
     }
     .service-card.center {
