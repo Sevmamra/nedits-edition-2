@@ -1,0 +1,477 @@
+/* ======================================
+   Global Reset & Body
+====================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f4f4f4;
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* ======================================
+   Header (PC / Laptop / iPad)
+====================================== */
+header {
+  background: linear-gradient(45deg, #ff6a00, #ee0979);
+  color: #fff;
+  line-height: 1;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.header-container {
+  align-items: flex-start;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  padding: 2px 0;
+  position: relative;
+}
+
+.logo {
+  height: 70px;
+  position: relative;
+  right: -13px;
+  top: 10px;
+}
+
+.header-title-img {
+  height: 95px;
+  left: -3px;
+  position: relative;
+  top: -2px;
+}
+
+.tagline {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-top: -5px;
+  position: relative;
+  top: -10px;
+}
+
+/* ======================================
+   Header — Mobile (max-width: 767px)
+====================================== */
+@media (max-width: 767px) {
+  header {
+    padding: 10px;
+  }
+
+  .header-container {
+    gap: 8px;
+    padding: 5px 0;
+  }
+
+  .logo {
+    height: 95px;
+    right: -10px;
+    top: 12px;
+  }
+
+  .header-title-img {
+    height: 125px;
+    left: 0;
+    top: -1px;
+  }
+
+  .tagline {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.7px;
+    margin-top: -4px;
+    top: -8px;
+  }
+}
+
+/* ======================================
+   Navigation
+====================================== */
+nav {
+  background-color: #222;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 12px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav a {
+  color: #f2f2f2;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #ee0979;
+}
+
+/* ======================================
+   Hero Section
+====================================== */
+.hero {
+  background: url('../images/hero-bg1.jpg') no-repeat center center;
+  background-size: cover;
+  color: #fff;
+  height: 550px;
+  overflow: hidden;
+  padding: 100px 20px;
+  position: relative;
+  text-align: center;
+  transition: background-image 1s ease-in-out;
+}
+
+.hero-bg::after {
+  background: rgba(0, 0, 0, 0.4);
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.hero-title-img {
+  display: block;
+  height: 360px;
+  margin: -150px auto 20px auto;
+}
+
+.explore-btn {
+  background: red;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+  color: white;
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 50px auto 0 auto;
+  padding: 10px 24px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.explore-btn:hover {
+  background: darkred;
+}
+
+/* ======================================
+   Section Headings
+====================================== */
+.section {
+  margin: auto;
+  max-width: 1100px;
+  padding: 70px 20px;
+}
+
+/* ======================================
+   Section Headings
+====================================== */
+.section h2 {
+  color: #333;
+  font-family: 'Days One', sans-serif;
+  font-size: 32px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.section h2::before {
+  content: '';
+  width: 6px;
+  height: 40px;
+  background: #7b0091;
+  margin-right: 15px;
+  transform: scaleX(0); /* Animation ke liye */
+  transform-origin: left;
+  transition: transform 0.8s ease-out;
+}
+
+.section h2.aos-animate::before {
+  transform: scaleX(1);
+}
+
+/* ======================================
+  New Services Section - Final Update (Updated CSS)
+====================================== */
+.services-category {
+    margin-bottom: 50px;
+}
+
+.category-header {
+    background: #222;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.category-header img {
+    width: 30px;
+    height: 30px;
+}
+
+.category-header h3 {
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #fff;
+    margin: 0;
+}
+
+.services-container {
+    position: relative;
+    overflow: hidden; /* Yeh important hai, taki half cards hide ho jaayein */
+    height: 400px;
+}
+
+.services-carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth animation ke liye transition */
+    will-change: transform;
+}
+
+.service-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 30px 20px;
+    text-align: center;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* All properties par transition */
+    cursor: pointer;
+    flex-shrink: 0;
+    width: 320px; /* Base width for all cards */
+    height: auto;
+    position: absolute; /* Positioning ke liye absolute */
+    left: 50%; /* Center se position */
+    top: 50%;
+    transform-origin: center;
+    visibility: hidden; /* Hidden cards ko hide rakhenge */
+    opacity: 0; /* Opacity se fade in/out effect */
+}
+
+/* New CSS classes for positions */
+.service-card.left {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-100%, -50%) scale(0.8) rotateY(20deg); /* Left card ko bahar dhakela, thoda scale kiya aur rotate kiya */
+    z-index: 1;
+}
+
+.service-card.center {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1); /* Center card ko bada kiya */
+    z-index: 10;
+}
+
+.service-card.right {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(0, -50%) scale(0.8) rotateY(-20deg); /* Right card ko bahar dhakela, thoda scale kiya aur rotate kiya */
+    z-index: 1;
+}
+
+/* On-click glow effect */
+.service-card.active {
+    box-shadow: 0 0 25px 5px #7b0091;
+    transform: translate(-50%, -50%) scale(1.15) translateY(-5px); /* Glow ke saath thoda upar utha hua */
+}
+
+/* Card content fonts as before */
+.card-content h4 {
+    font-family: 'Neuton', serif;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    background: #333;
+    color: #fff;
+    padding: 5px 10px;
+}
+
+.card-content p {
+    font-family: 'ABeeZee', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+@media (max-width: 767px) {
+    .services-container {
+        height: 380px;
+    }
+    .service-card {
+        width: 280px;
+    }
+    /* Mobile par 3D effect thoda kam kar sakte hain ya hata sakte hain */
+    .service-card.left {
+        transform: translate(-120%, -50%) scale(0.8);
+        z-index: 1;
+    }
+    .service-card.right {
+        transform: translate(20%, -50%) scale(0.8);
+        z-index: 1;
+    }
+    .service-card.center {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    .category-header h3 {
+        font-size: 24px;
+    }
+}
+
+/* ======================================
+   About Us Section
+====================================== */
+.about-box {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  padding: 30px;
+}
+
+.about-box p {
+  color: #333;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* ======================================
+   Testimonials Section
+====================================== */
+.testimonial {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+  padding: 25px;
+  position: relative;
+}
+
+.testimonial-bar {
+  background: #7b0091;
+  border-radius: 2px;
+  height: 80%;
+  left: 0;
+  position: absolute;
+  top: 10px;
+  width: 4px;
+}
+
+.testimonial p {
+  font-size: 16px;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.testimonial span {
+  color: #7b0091;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* ======================================
+   Contact Form Section
+====================================== */
+.contact-form {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+  margin-top: 20px;
+  padding: 35px;
+}
+
+form input,
+form textarea {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  margin: 12px 0;
+  padding: 14px;
+  width: 100%;
+}
+
+.contact-btn {
+  background: linear-gradient(45deg, #ff0080, #7928ca);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  padding: 14px 28px;
+  transition: 0.3s;
+}
+
+.contact-btn:hover {
+  box-shadow: 0 0 20px #910091;
+}
+
+/* ======================================
+   Footer Section
+====================================== */
+footer {
+  background: #222;
+  color: #f2f2f2;
+  font-size: 14px;
+  margin-top: 50px;
+  padding: 18px;
+  text-align: center;
+}
+
+.footer-links {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #f2f2f2;
+  margin: 0 12px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  color: #ee0979;
+}
+
+.social-icons a {
+  color: #f2f2f2;
+  margin: 0 8px;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  color: #ee0979;
+}
+
+/* ======================================
+   AOS Animations Defaults
+====================================== */
+[data-aos] {
+  opacity: 0;
+  transition-property: transform, opacity;
+}
+
+[data-aos].aos-animate {
+  opacity: 1;
+}
