@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
     containers.forEach(container => {
         const carousel = container.querySelector('.services-carousel');
         const cards = Array.from(carousel.querySelectorAll('.service-card'));
+        const totalCards = cards.length;
         let currentIndex = 0;
         let intervalId;
         let isPaused = false;
@@ -70,40 +71,33 @@ document.addEventListener('DOMContentLoaded', function () {
             if (isAnimating) return;
             isAnimating = true;
 
-            const totalCards = cards.length;
-
             // Remove all position and active classes from all cards
             cards.forEach(card => {
-                card.classList.remove('center', 'left', 'right', 'active');
-                card.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                card.classList.remove('center', 'left', 'right', 'active', 'previous-left', 'previous-right');
+                card.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
             });
 
             // Calculate the indices of the visible cards
             const leftIndex = (currentIndex - 1 + totalCards) % totalCards;
             const rightIndex = (currentIndex + 1) % totalCards;
 
-            // Animate cards to their new positions
+            // Apply classes to the visible cards
             cards[leftIndex].classList.add('left');
             cards[currentIndex].classList.add('center');
             cards[rightIndex].classList.add('right');
 
-            // Handle the card that is leaving
-            const oldLeftIndex = (currentIndex - 2 + totalCards) % totalCards;
-            const oldRightIndex = (currentIndex + 2) % totalCards;
-
-            // Animate the outgoing left card to completely disappear
-            cards[oldLeftIndex].style.transform = 'translate(-200%, -50%) scale(0.6)';
-            cards[oldLeftIndex].style.opacity = '0';
-            cards[oldLeftIndex].style.visibility = 'hidden';
-
-            // Animate the outgoing right card to completely disappear
-            cards[oldRightIndex].style.transform = 'translate(100%, -50%) scale(0.6)';
-            cards[oldRightIndex].style.opacity = '0';
-            cards[oldRightIndex].style.visibility = 'hidden';
+            // Hide cards that are not in visible positions
+            cards.forEach((card, index) => {
+                if (index !== leftIndex && index !== currentIndex && index !== rightIndex) {
+                    card.style.visibility = 'hidden';
+                } else {
+                    card.style.visibility = 'visible';
+                }
+            });
 
             setTimeout(() => {
                 isAnimating = false;
-            }, 600); // Match this with your CSS transition duration
+            }, 800); // Match this with your CSS transition duration
         }
 
         // Auto-move carousel
@@ -118,24 +112,19 @@ document.addEventListener('DOMContentLoaded', function () {
         // Click event on cards (for glow & navigation)
         carousel.addEventListener('click', (event) => {
             const clickedCard = event.target.closest('.service-card');
-            if (!clickedCard) return;
+            if (!clickedCard || isAnimating) return;
 
-            // Pause and restart logic
             clearInterval(intervalId);
             isPaused = true;
 
-            // Handle card selection
             if (clickedCard.classList.contains('center')) {
-                // If center card is clicked, toggle 'active' class
                 clickedCard.classList.toggle('active');
             } else {
-                // If side card is clicked, make it the center card
                 const clickedIndex = cards.indexOf(clickedCard);
                 currentIndex = clickedIndex;
                 updateCardPositions();
             }
 
-            // If no card is active, restart carousel
             const anyActiveCard = carousel.querySelector('.service-card.active');
             if (!anyActiveCard) {
                 isPaused = false;
