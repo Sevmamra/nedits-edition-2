@@ -236,7 +236,7 @@ nav a:hover {
 .services-container {
     position: relative;
     overflow: hidden; /* Yeh important hai, taki half cards hide ho jaayein */
-    height: 500px; /* Card ki length badhane ke liye height badhai */
+    height: 400px; /* Card ki length badhane ke liye height badhai */
 }
 
 .services-carousel {
@@ -262,7 +262,7 @@ nav a:hover {
     flex-shrink: 0;
     width: 320px; /* Base width for all cards */
     height: auto;
-    min-height: 420px; /* Cards ki length badhane ke liye min-height use kiya, aur thoda aur badhaya */
+    min-height: 280px; /* Cards ki length badhane ke liye min-height use kiya, aur thoda aur badhaya */
     position: absolute; /* Positioning ke liye absolute */
     left: 50%; /* Center se position */
     top: 50%;
@@ -323,10 +323,11 @@ nav a:hover {
 
 @media (max-width: 767px) {
     .services-container {
-        height: 480px;
+        height: 380px;
     }
     .service-card {
         width: 280px;
+        min-height: 250px;
     }
     /* Mobile par 3D effect adjust kiya */
     .service-card.left {
