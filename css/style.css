@@ -243,12 +243,11 @@ nav a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth animation ke liye transition time badhaya */
+    /* Transition yahan se hata di hai, ab cards par individually apply hogi */
     will-change: transform;
 }
 
@@ -258,12 +257,12 @@ nav a:hover {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     padding: 30px 20px;
     text-align: center;
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* All properties par transition time badhaya */
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* All properties par transition */
     cursor: pointer;
     flex-shrink: 0;
     width: 320px; /* Base width for all cards */
     height: auto;
-    min-height: 380px; /* Cards ki length badhane ke liye min-height use kiya */
+    min-height: 420px; /* Cards ki length badhane ke liye min-height use kiya, aur thoda aur badhaya */
     position: absolute; /* Positioning ke liye absolute */
     left: 50%; /* Center se position */
     top: 50%;
@@ -285,7 +284,7 @@ nav a:hover {
 
 .service-card.right {
     transform: translate(50%, -50%) scale(0.7) rotateY(-30deg); /* Right card ko aur bahar dhakela, scale kiya aur rotate kiya */
-    opacity: 0.5; /* Opacity 50% rakhi */
+    opacity: 0.5; /* Opacity 0.5 rakhi */
     z-index: 1;
 }
 
@@ -293,6 +292,16 @@ nav a:hover {
 .service-card.active {
     box-shadow: 0 0 25px 5px #7b0091;
     transform: translate(-50%, -50%) scale(1.15) translateY(-5px); /* Glow ke saath thoda upar utha hua */
+}
+
+/* New classes for animation */
+.service-card.leaving-left {
+    transform: translate(-200%, -50%) scale(0.6) rotateY(45deg); /* Left card ko fade out karne ke liye */
+    opacity: 0;
+}
+.service-card.entering-right {
+    transform: translate(150%, -50%) scale(0.6) rotateY(-45deg); /* Right se naya card aayega */
+    opacity: 0;
 }
 
 /* Card content fonts as before */
@@ -314,7 +323,7 @@ nav a:hover {
 
 @media (max-width: 767px) {
     .services-container {
-        height: 450px;
+        height: 480px;
     }
     .service-card {
         width: 280px;
